@@ -97,3 +97,139 @@ navLinks.querySelectorAll("a").forEach(link => {
   });
 
 });
+
+// PREVIOUS YEAR PAPERS DATABASE
+
+const papers = [
+    {
+        title: "Engineering Mathematics",
+        subject: "mathematics",
+        semester: "1",
+        year: "2025",
+        file: "papers/maths-2025.pdf"
+    },
+    {
+        title: "Engineering Physics",
+        subject: "physics",
+        semester: "1",
+        year: "2025",
+        file: "papers/physics-2025.pdf"
+    },
+    {
+        title: "Engineering Chemistry",
+        subject: "chemistry",
+        semester: "1",
+        year: "2025",
+        file: "papers/chemistry-2025.pdf"
+    },
+    {
+        title: "Basic Electrical Engineering",
+        subject: "electrical",
+        semester: "1",
+        year: "2025",
+        file: "papers/electrical-2025.pdf"
+    }
+];
+
+// DISPLAY PAPERS
+
+const container = document.getElementById("papersContainer");
+const searchInput = document.getElementById("paperSearch");
+const subjectFilter = document.getElementById("subjectFilter");
+const semesterFilter = document.getElementById("semesterFilter");
+const noPapers = document.getElementById("noPapers");
+
+function displayPapers() {
+
+    const search = searchInput.value.toLowerCase();
+    const subject = subjectFilter.value;
+    const semester = semesterFilter.value;
+
+    const filtered = papers.filter(paper => {
+
+        const matchesSearch =
+            paper.title.toLowerCase().includes(search) ||
+            paper.year.includes(search) ||
+            paper.subject.toLowerCase().includes(search);
+
+        const matchesSubject =
+            subject === "all" || paper.subject === subject;
+
+        const matchesSemester =
+            semester === "all" || paper.semester === semester;
+
+        return matchesSearch && matchesSubject && matchesSemester;
+    });
+
+    container.innerHTML = "";
+
+    noPapers.hidden = filtered.length !== 0;
+
+    filtered.forEach(paper => {
+
+        const card = document.createElement("div");
+        card.className = "paper-card";
+
+        const heading = document.createElement("h3");
+        heading.textContent = paper.title;
+
+        const icon = document.createElement("div");
+        icon.className = "pdf-icon";
+        icon.textContent = "📄";
+
+        const description = document.createElement("p");
+        description.textContent = "AKTU Previous Year Question Paper";
+
+        const subjectLabel = document.createElement("span");
+        subjectLabel.className = "paper-label";
+        subjectLabel.textContent = paper.subject.toUpperCase();
+
+        const yearLabel = document.createElement("span");
+        yearLabel.className = "paper-label";
+        yearLabel.textContent = paper.year;
+
+        const semesterLabel = document.createElement("span");
+        semesterLabel.className = "paper-label";
+        semesterLabel.textContent = "Semester " + paper.semester;
+
+        const actions = document.createElement("div");
+        actions.className = "paper-actions";
+
+        const view = document.createElement("a");
+        view.className = "view-btn";
+        view.href = paper.file;
+        view.target = "_blank";
+        view.rel = "noopener";
+        view.textContent = "View PDF";
+
+        const download = document.createElement("a");
+        download.className = "download-btn";
+        download.href = paper.file;
+        download.download = "";
+        download.textContent = "Download";
+
+        actions.append(view, download);
+
+        card.append(
+            icon,
+            heading,
+            description,
+            subjectLabel,
+            yearLabel,
+            semesterLabel,
+            actions
+        );
+
+        container.appendChild(card);
+    });
+}
+
+// SEARCH AND FILTER EVENTS
+
+searchInput.addEventListener("input", displayPapers);
+subjectFilter.addEventListener("change", displayPapers);
+semesterFilter.addEventListener("change", displayPapers);
+
+// INITIAL DISPLAY
+
+displayPapers();

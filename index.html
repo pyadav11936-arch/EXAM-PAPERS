@@ -90,26 +90,50 @@
 
 </section>
 
-<section class="paper-feature" id="papers">
 
-  <div class="paper-icon">
-    📄<span>◷</span>
+<section class="paper-library" id="paper-library">
+
+  <p class="eyebrow">YOUR EXAM PREPARATION SPACE</p>
+
+  <h2>
+    Find your <span>Previous Year Papers</span>
+  </h2>
+
+  <p class="library-note">
+    Search, view and download AKTU previous year question papers.
+  </p>
+
+  <div class="library-controls">
+
+    <input
+      type="search"
+      id="librarySearch"
+      placeholder="Search subject or year..."
+    >
+
+    <select id="subjectFilter">
+      <option value="all">All Subjects</option>
+      <option value="mathematics">Mathematics</option>
+      <option value="physics">Physics</option>
+      <option value="chemistry">Chemistry</option>
+      <option value="electrical">Electrical Engineering</option>
+    </select>
+
+    <select id="semesterFilter">
+      <option value="all">All Semesters</option>
+      <option value="1">Semester 1</option>
+      <option value="2">Semester 2</option>
+    </select>
+
   </div>
 
-  <div class="feature-divider"></div>
+  <div class="papers-grid" id="papersContainer"></div>
 
-  <div class="paper-copy">
-    <h2>Previous Year <span>Papers</span></h2>
-
-    <p>
-      Access all Previous Year Papers in one place
-      and boost your preparation.
-    </p>
+  <div class="empty-paper" id="noPapers" hidden>
+    <span>📚</span>
+    <p>No papers found!</p>
+    <small>Try another subject or search.</small>
   </div>
-
-  <a class="view-button" href="#paper-library">
-    View Papers <span>›</span>
-  </a>
 
 </section>
 
